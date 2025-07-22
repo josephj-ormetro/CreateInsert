@@ -50,7 +50,13 @@ for i in range(len(rows)):
     for j in range(len(row)):
         # append each value to the string, formatting types accordingly
         value = row[j]
-        thisRow += formatValue(value)
+        # if it's the first row of the spreadsheet, don't quote - these
+        # are column names
+        if i == 0:
+            thisRow += value
+        # otherwise, quote anything that's not a number (including dates)
+        else:
+            thisRow += formatValue(value)
         if j < len(row) - 1:
             thisRow += ',\t'
     
